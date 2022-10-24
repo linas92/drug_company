@@ -25,3 +25,4 @@ if __name__ == "__main__":
                 last_name = input("Enter the customers last name: "), 
                 phone_number = int(input("Enter the customers phone number: ")),
             )
+        if pasirinkimas == 2:
