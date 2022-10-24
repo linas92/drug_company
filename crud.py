@@ -1,5 +1,5 @@
 from sqlalchemy.orm import sessionmaker
-from drugs import engine, Customer, Cashier, Company, Vitamin
+from drugs import engine, Customer, Cashier, Company, Vitamin, Drug
 
 session = sessionmaker(bind=engine)()
 
@@ -16,9 +16,12 @@ if __name__ == "__main__":
     while True:
         print("==================================================================================")
         print("Use your keys to insert data:")
-        print("1 - Customers name")
-        print("2 - reviews customers n stuff")
-        print("3 - ")
+        print("1 - Customer name")
+        print("2 - Cashier name")
+        print("3 - Company name")
+        print("4 - Vitamin name")
+        print("5 - Drug name")
+
         print("==================================================================================")
         pasirinkimas = int(input())
         if pasirinkimas == 1:
@@ -33,9 +36,8 @@ if __name__ == "__main__":
         if pasirinkimas == 2:
             create_object(
                 Cashier,
-                name = input("Enter the companies name: "),
-                last_name = input("Enter the companies address: "), 
-                telephone = input("Enter the companies telephone number: "), 
+                name = input("Enter the cashier name: "),
+                last_name = input("Enter the cashier last name: "), 
             )
         if pasirinkimas == 3:
             create_object(
@@ -47,12 +49,12 @@ if __name__ == "__main__":
         if pasirinkimas == 4:
             create_object(
                 Vitamin,
-                name = input("Enter the companies name: "),
+                name = input("Enter the vitamins name: "),
             )
         if pasirinkimas == 5:
             create_object(
                 Drug,
-                name = input("Enter the companies name: "),
+                name = input("Enter the drugs name: "),
             )
 
 
