@@ -11,7 +11,7 @@ class Customer(Base):
     name = Column("name", String)
     last_name = Column("last_name", String)
     phone_number = Column("phone_number", Integer)
-    cashiers = relationship("Cashier", back_populates = "cashier")
+    # cashiers = relationship("Cashier", back_populates = "cashier")
 
     def __repr__(self):
         return f"({self.id}, {self.name}, {self.last_name}, {self.phone_number}, )"
