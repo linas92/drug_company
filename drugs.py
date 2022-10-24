@@ -10,6 +10,7 @@ class Customer(Base):
     id = Column(Integer, primary_key = True)
     name = Column("name", String)
     last_name = Column("last_name", String)
+    address = Column("address", String)
     phone_number = Column("phone_number", Integer)
     email = Column("email", Integer)
     # cashiers = relationship("Cashier", back_populates = "cashier")
@@ -46,7 +47,7 @@ class Vitamin(Base):
     __tablename__ = "vitamin"
     id = Column(Integer, primary_key = True)
     name = Column("name", String)
-    # drug_id = relationship("Company", back_populates = "company")
+    # vitamin_id = relationship("Company", back_populates = "company")
 
     def __repr__(self):
         return f"({self.id}, {self.name}, )"
@@ -55,6 +56,7 @@ class Drug(Base):
     __tablename__ = "drug"
     id = Column(Integer, primary_key = True)
     name = Column("name", String)
+    # drug_id = relationship("Company", back_populates = "company")
 
     def __repr__(self):
         return f"({self.id}, {self.name}, )"
@@ -63,3 +65,4 @@ class Drug(Base):
 if __name__ == "__main__":
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
+
