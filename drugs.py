@@ -5,19 +5,13 @@ from sqlalchemy.orm import relationship
 engine = create_engine("sqlite:///data/drugs.db")
 Base = declarative_base()
 
-# susikursiu keleta klasiu ir lenteliu:
-# 1 - vartotojas
-# 2 - kasininkas
-# 3 - kompanija
-# 4 - vaistas
-
 class Customer(Base):
     __tablename__ = "customer"
     id = Column(Integer, primary_key = True)
     name = Column("name", String)
     last_name = Column("last_name", String)
     phone_number = Column("phone_number", Integer)
-    # cashier_id = relationship("Cashier", back_populates = "cashier")
+    cashiers = relationship("Cashier", back_populates = "cashier")
 
     def __repr__(self):
         return f"({self.id}, {self.name}, {self.last_name}, {self.phone_number}, )"
@@ -54,7 +48,6 @@ class Vitamin(Base):
 
     def __repr__(self):
         return f"({self.id}, {self.name}, )"
-
 
 
 if __name__ == "__main__":
