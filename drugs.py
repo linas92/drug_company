@@ -17,7 +17,7 @@ class Customer(Base):
 
     def __repr__(self):
         return f"({self.id},{self.name},{self.last_name},{self.phone_number}, {self.email})"
-    
+
 
 class Cashier(Base):
     __tablename__ = "cashier"
