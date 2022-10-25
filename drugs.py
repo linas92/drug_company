@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine,Table
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -10,12 +10,13 @@ class Customer(Base):
     id = Column(Integer, primary_key = True)
     name = Column("name", String)
     last_name = Column("last_name", String)
-    address = Column("address", String)
+    address = Column("address", String, unique = True)
     phone_number = Column("phone_number", Integer)
-    email = Column("email", Integer)
+    email = Column("email", String)
+    cashier = relationship("Cashier", back_populates = "customer")
 
     def __repr__(self):
-        return f"({self.id},{self.name},{self.last_name},{self.phone_number},{self.email})"
+        return f"({self.id},{self.name},{self.last_name},{self.address},{self.phone_number},{self.email})"
 
 
 class Cashier(Base):
@@ -24,14 +25,14 @@ class Cashier(Base):
     name = Column("name", String)
     last_name = Column("last_name", String)
 
-    companies_id = Column("companies_id", Integer, ForeignKey("companies.id"))
-    companies = relationship("Company", back_populates = "cashiers")
-
-    customers_id = Column("customers_id", Integer, ForeignKey("customers.id"))
-    customers = relationship("Customer", back_populates = "cashiers")
+    customer_id = Column("customer_id", Integer, ForeignKey("customer.id"))
+    customer = relationship("Customer", back_populates = "cashier")
+    
+    company_id = Column("company_id", Integer, ForeignKey("company.id"))
+    company = relationship("Company", back_populates = "cashier")
 
     def __repr__(self):
-        return f"({self.id}, {self.name}, {self.last_name})"
+        return f"({self.id},{self.name},{self.last_name})"
 
 
 class Company(Base):
@@ -39,36 +40,35 @@ class Company(Base):
     id = Column(Integer, primary_key = True)
     name = Column("name", String)
     address = Column("address", String)
-    telephone = Column("telephone", Integer)
-
-    cashiers_id = Column("cashiers_id", Integer, ForeignKey("cashiers.id"))
-    cashiers = relationship("Cashier", back_populates = "companies")
-
-    def __repr__(self):
-        return f"({self.id}, {self.name}, {self.address}, {self.telephone})"
-
-
-class Vitamin(Base):
-    __tablename__ = "vita"
-    id = Column(Integer, primary_key = True)
-    name = Column("name", String)
-    vitamin = Column("vitamin_id", Integer, ForeignKey("vitamin.id"))
+    phone_number = Column("phone_number", Integer)
+    cashier = relationship("Cashier", back_populates = "company")
+    # vitamin_id = Column("vitamin_id", Integer, ForeignKey("vitamin.id"))
+    # vitamin = relationship("Vitamin", back_populates = "company") 
 
     def __repr__(self):
-        return f"({self.id}, {self.name}, )"
+        return f"({self.id},{self.name},{self.address},{self.phone_number})"
 
 
-class Drug(Base):
-    __tablename__ = "drugs"
-    id = Column(Integer, primary_key = True)
-    name = Column("name", String)
-    drug = Column("drug_id", Integer, ForeignKey("drug.id"))
+# class Vitamin(Base):
+#     __tablename__ = "vitamin"
+#     id = Column(Integer, primary_key = True)
+#     name = Column("name", String)
+#     company = relationship("Company", back_populates = "vitamin")
 
-    def __repr__(self):
-        return f"({self.id}, {self.name}, )"
+#     def __repr__(self):
+#         return f"({self.id}, {self.name})"
+
+
+# class Drug(Base):
+#     __tablename__ = "drug"
+#     id = Column(Integer, primary_key = True)
+#     name = Column("name", String)
+#     company = relationship("Company", back_populates = "drug")
+
+#     def __repr__(self):
+#         return f"({self.id}, {self.name})"
 
 
 if __name__ == "__main__":
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
-
