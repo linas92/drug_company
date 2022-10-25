@@ -24,12 +24,12 @@ def view_companies():
     for company in view_companies:
         print(company)
 
-def delete_object(id):
+def delete_object():
     pass
 
 if __name__ == "__main__":
     while True:
-        print("==================================================================================")
+        print("========================================================================")
         print("Key commands to manipulate data:")
         print("1 - Insert Customer name")
         print("2 - Insert Cashier name")
@@ -37,11 +37,11 @@ if __name__ == "__main__":
         print("4 - View Customer list")
         print("5 - View Cashier list")
         print("6 - View Company list")
-        print("7 - Delete Customers data")
-        print("8 - Delete Cashiers data")
-        print("9 - Delete Companies data")
+        print("7 - Delete Customers data - PAID FEATURE")
+        print("8 - Delete Cashiers data - PAID FEATURE")
+        print("9 - Delete Companies data - PAID FEATURE")
         print("0 - Exit program")
-        print("==================================================================================")
+        print("========================================================================")
         pasirinkimas = int(input())
         if pasirinkimas == 1:
             create_object(
@@ -72,11 +72,11 @@ if __name__ == "__main__":
         if pasirinkimas == 6:
             view_companies()
         if pasirinkimas == 7:
-            delete_object()#remove customer from database
+            delete_object()
         if pasirinkimas == 8:
-            delete_object()#remove cashier from database
+            delete_object()
         if pasirinkimas == 9:
-            delete_object()#remove company from database
+            delete_object()
         if pasirinkimas == 0:
             print("Thank you and have an awesome day!")
             exit()
